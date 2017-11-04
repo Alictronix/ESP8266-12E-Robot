@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset=utf-8 />
+	<title>aREST.js Demo</title>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+	<script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+	<script type="text/javascript" src="https://cdn.rawgit.com/Foliotek/AjaxQ/master/ajaxq.js"></script>
+	<script type="text/javascript" src="https://cdn.rawgit.com/marcoschwartz/aREST.js/master/aREST.js"></script>
+	<script type="text/javascript" >
+    $(document).ready(function() {
+    
+    var address= '192.168.0.30';
+    var device = new Device(address);
+    // Buttons
+    $('#forward').mousedown(function() {
+      device.callFunction("forward");
+    });
+    $('#forward').mouseup(function() {
+      device.callFunction("stop");
+    });
+
+    $('#right').mousedown(function() {
+      device.callFunction("right");
+    });
+    $('#right').mouseup(function() {
+      device.callFunction("stop");
+    });
+
+    $('#left').mousedown(function() {
+      device.callFunction("left");
+    });
+    $('#left').mouseup(function() {
+      device.callFunction("stop");
+    });
+
+    $('#backward').mousedown(function() {
+      device.callFunction("backward");
+    });
+    $('#backward').mouseup(function() {
+      device.callFunction("stop");
+    });
+
+});
+    </script>
+    
+<style>body {  font-size: 20px;}
+</style>
+</head>
+<body>
+
+<div class='container'>
+
+<h1>Robot</h1>
+    
+
+
+<div class='row'>
+
+	<div class="col-md-5"></div>
+  <div class="col-md-2">
+    <button id='forward' class='btn btn-primary btn-block' type="button">Forward</button>
+  </div>
+	<div class="col-md-5"></div>
+
+</div>
+
+<div class='row'>
+
+	<div class="col-md-4"></div>
+	<div class="col-md-2">
+		<button id='left' class='btn btn-primary btn-block' type="button">Left</button>
+	</div>
+
+	<div class="col-md-2">
+		<button id='right' class='btn btn-primary btn-block' type="button">Right</button>
+	</div>
+	<div class="col-md-4"></div>
+
+</div>
+
+<div class='row'>
+
+	<div class="col-md-5"></div>
+  <div class="col-md-2">
+    <button id='backward' class='btn btn-primary btn-block' type="button">Backward</button>
+  </div>
+	<div class="col-md-5"></div>
+
+</div>
+
+</div>
+    
+
+
+</body>
+</html>
