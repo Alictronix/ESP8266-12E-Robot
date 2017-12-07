@@ -1,25 +1,21 @@
 // include libraries
 #include "SSD1306.h"
 #include <Servo.h>
-//#include "DCMotor.h"
  
 // setup servo
 #define SERVORIGHT   50
-#define SERVOCENTRE 100
-#define SERVOLEFT   150
+#define SERVOCENTRE  100
+#define SERVOLEFT    150
 #define SERVOPIN     16
-#define TRIGPIN 13    // pin no. 13 is D7 ESP8266
-#define ECHOPIN 15    // pin no. 15  is D8 ESP8266
+#define TRIGPIN      13    // pin no. 13  is D7 ESP8266
+#define ECHOPIN      15    // pin no. 15  is D8 ESP8266
 
-int Speed = 1023;
-int TSpeed = 700;
+int Speed = 900;  // max 1024
+int TSpeed = 1020;  //Turning Speed
 Servo servo;
-SSD1306  display(0x3c, D5, D6); //sda-D5, sck -d6
 
-// setup Ultrasonic sensor
-//#define TRIGPIN 4
-//#define ECHOPIN 0
-
+//Optional 0.96" OLED display
+SSD1306  display(0x3c, D5, D6); //sda-D5, sck -D6
 
 void stoped()
 {
@@ -126,18 +122,18 @@ char scan()
 void setup()
 {
     Serial.begin(115200);
-    Serial.println("Alictronix Obstacle Bot 2WD v1.0");
+    Serial.println("Alictronix Obstacle Bot 2WD/4WD v1.0");
     // set the servo data pin
     servo.attach(SERVOPIN);
 
     pinMode(5, OUTPUT);
-  pinMode(4, OUTPUT);
-  pinMode(0, OUTPUT);
-  pinMode(2, OUTPUT);
-  digitalWrite(5, 0);
-  digitalWrite(4, 0);
-  digitalWrite(0, 1);
-  digitalWrite(2, 1);
+    pinMode(4, OUTPUT);
+    pinMode(0, OUTPUT);
+    pinMode(2, OUTPUT);
+    digitalWrite(5, 0);
+    digitalWrite(4, 0);
+    digitalWrite(0, 1);
+    digitalWrite(2, 1);
     // set the trig pin to output (send sound waves)
     pinMode(TRIGPIN, OUTPUT);
  
@@ -156,9 +152,9 @@ void loop()
     unsigned int distance = ping();
     Serial.print("Distance: "); Serial.println(distance);
     display.clear();
-   display.drawString(10, 20, "Distance: "+String(distance));
-   display.display();
-    if (distance < 50 && distance > 0)
+    display.drawString(10, 20, "Distance: "+String(distance));
+    display.display();
+    if (distance < 30 && distance > 0)
     {
         if (distance < 10)
         {
@@ -168,7 +164,7 @@ void loop()
             back();
             delay(300);
             left();
-            delay(500);
+            delay(700);
         }
         else
         {
@@ -186,14 +182,14 @@ void loop()
               Serial.println("Turn left...");
               display.drawString(10, 40, "Turn left...") ; 
                 left();
-                delay(200);
+                delay(500);
             }
             else if (turn_direction == 'r')
             {
               Serial.println("Turn right...");
               display.drawString(10, 40, "Turn right...") ; 
                 right();
-                delay(200);
+                delay(500);
             }
             else if (turn_direction == 'c')
             {
@@ -203,7 +199,7 @@ void loop()
                 Serial.println("Turn back...");
                 display.drawString(10, 40, "Turn back...") ; 
                 right();
-                delay(400);
+                delay(700);
               }
               
             }
