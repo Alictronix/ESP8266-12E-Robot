@@ -126,7 +126,7 @@ char scan()
 void setup()
 {
     Serial.begin(115200);
-    Serial.println("MakrFun Obstacle Bot 2WD v1.0");
+    Serial.println("Alictronix Obstacle Bot 2WD v1.0");
     // set the servo data pin
     servo.attach(SERVOPIN);
 
