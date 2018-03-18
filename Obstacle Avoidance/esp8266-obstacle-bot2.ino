@@ -1,5 +1,5 @@
 // include libraries
-#include "SSD1306.h"
+//#include "SSD1306.h"
 #include <Servo.h>
  
 // setup servo
@@ -15,7 +15,7 @@ int TSpeed = 1020;  //Turning Speed
 Servo servo;
 
 //Optional 0.96" OLED display
-SSD1306  display(0x3c, D5, D6); //sda-D5, sck -D6
+//SSD1306  display(0x3c, D5, D6); //sda-D5, sck -D6
 
 void stoped()
 {
@@ -140,10 +140,10 @@ void setup()
     // set the echo pin to input (receive sound waves)
     pinMode(ECHOPIN, INPUT);
 
-display.init();
-display.flipScreenVertically();
-display.setFont(ArialMT_Plain_16);
-display.setTextAlignment(TEXT_ALIGN_LEFT);
+//display.init();
+//display.flipScreenVertically();
+//display.setFont(ArialMT_Plain_16);
+//display.setTextAlignment(TEXT_ALIGN_LEFT);
 }
 
 void loop()
@@ -151,16 +151,16 @@ void loop()
     // get distance from obstacle straight ahead
     unsigned int distance = ping();
     Serial.print("Distance: "); Serial.println(distance);
-    display.clear();
-    display.drawString(10, 20, "Distance: "+String(distance));
-    display.display();
+   // display.clear();
+   // display.drawString(10, 20, "Distance: "+String(distance));
+  //  display.display();
     if (distance < 30 && distance > 0)
     {
         if (distance < 10)
         {
             // turn around
             Serial.println("Turn around..."); 
-            display.drawString(10, 40, "Turn around...") ;         
+           // display.drawString(10, 40, "Turn around...") ;         
             back();
             delay(300);
             left();
@@ -170,7 +170,7 @@ void loop()
         {
             // stop both motors
             Serial.println("Motor stop...");
-            display.drawString(10, 40, "Motor stop...") ; 
+           // display.drawString(10, 40, "Motor stop...") ; 
             stoped();
             
             // scan for obstacles
@@ -180,14 +180,14 @@ void loop()
             if (turn_direction == 'l')
             {
               Serial.println("Turn left...");
-              display.drawString(10, 40, "Turn left...") ; 
+            //  display.drawString(10, 40, "Turn left...") ; 
                 left();
                 delay(500);
             }
             else if (turn_direction == 'r')
             {
               Serial.println("Turn right...");
-              display.drawString(10, 40, "Turn right...") ; 
+            //  display.drawString(10, 40, "Turn right...") ; 
                 right();
                 delay(500);
             }
@@ -197,7 +197,7 @@ void loop()
               if(stopCount > 3){
                 stopCount = 0;
                 Serial.println("Turn back...");
-                display.drawString(10, 40, "Turn back...") ; 
+              //  display.drawString(10, 40, "Turn back...") ; 
                 right();
                 delay(700);
               }
@@ -209,7 +209,7 @@ void loop()
     {
         // no obstacle, keep going forward
         Serial.println("No obstacle, keep going forward...");
-        display.drawString(5, 40, "keep going forward...") ; 
+      //  display.drawString(5, 40, "keep going forward...") ; 
         forward();
     }
 }
